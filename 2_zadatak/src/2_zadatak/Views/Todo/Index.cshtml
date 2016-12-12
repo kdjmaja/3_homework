@@ -16,7 +16,7 @@
     {
         <p><b>@item.Text</b></p>
         <p>@item.DateCreated</p>
-        <a asp-controller="Todo" asp-action="MarkCompleted" asp-route-guid="@item.Id">Mark as completed</a>
+        <a asp-controller="Todo" asp-action="MarkCompleted" asp-route-id="@item.Id">Mark as completed</a>
                 <hr />
     }
 }

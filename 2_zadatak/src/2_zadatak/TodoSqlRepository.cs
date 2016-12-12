@@ -17,19 +17,21 @@ namespace _2_zadatak
         //iz nekog razloga ne funkcionira dobro
         public TodoItem Get(Guid todoId, Guid userId)
         {
-            var item = _context.TodoList.FirstOrDefault(p => p.Id == todoId);
-            if (item != null)
+            if (todoId == null)
             {
-                if (item.UserId.Equals(userId))
-                {
-                    return item;
-                }
-                else
-                {
-                    throw new TodoAccessDeniedException("Access Denied.");
-                }
+                throw new ArgumentNullException();
             }
-            return null;
+            TodoItem item = _context.TodoList.FirstOrDefault(a => a.Id.Equals(todoId));
+            if (item == null)
+            {
+                return null;
+ 
+            }
+            if (item.UserId != userId)
+            {
+                throw new TodoAccessDeniedException("Access denied.");
+            }
+            return item;
         }
 
         public void Add(TodoItem todoItem)
